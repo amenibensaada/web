@@ -1,4 +1,4 @@
-header {
+.title {
   /* text-align: center; */
   margin-top: 50px;
   font-family: "Poppins", sans-serif;
@@ -41,7 +41,10 @@ header {
   display: flex;
   margin-left: 0px;
 }
-
+.home-page {
+  height: 80vh;
+  margin: auto;
+}
 footer {
   margin-top: 250px;
   text-align: end;
@@ -49,9 +52,9 @@ footer {
 }
 
 .weather_image {
-  width: 400px;
-  margin-left: 100px;
+  width: 600px;
+  /* margin-left: 100px;
   margin-left: 0px;
   margin-top: 200px;
-  margin-bottom: 0px;
+  margin-bottom: 0px; */
 }
