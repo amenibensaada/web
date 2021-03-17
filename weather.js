@@ -32,9 +32,9 @@ function GetDay() {
   return weekDayName;
 }
 async function handleFetchData() {
-    const city="tunis" ; 
-//   const city = document.getElementById("city").value;
-  console.log("city", city);
+  const result = window.location.search;
+  city = result.split("=")[1];
+  console.log(result, city, result.split("="));
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=40&units=metric&APPID=${API_KEY}`;
   const response = await fetch(url);
   data = await response.json();
