@@ -2,7 +2,7 @@ body {
   font-family: "Poppins", sans-serif;
   width: 50%;
   margin: auto;
-  background-image: url("./background.jpg");
+  background-image: url("../image/images_homepage/background.jpg");
   background-size: cover;
 }
 
@@ -42,6 +42,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-left: 50%;
 }
 .list_item {
   display: flex;

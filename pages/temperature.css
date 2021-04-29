@@ -1,3 +1,6 @@
+body {
+  background-image: url(../image/images_homepage/background.jpg);
+}
 .title {
   /* text-align: center; */
   margin-top: 50px;
@@ -53,8 +56,4 @@ footer {
 
 .weather_image {
   width: 600px;
-  /* margin-left: 100px;
-  margin-left: 0px;
-  margin-top: 200px;
-  margin-bottom: 0px; */
 }

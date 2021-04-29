@@ -1,23 +1,6 @@
 const currentDayDOM = document.getElementById("currentDay");
 const API_KEY = "3d276dd0248a8f6d4a15500dc0dec11a";
 
-let state = {
-  humidity: "",
-  city: "",
-  country: "",
-  temp: "",
-  days: [],
-  icon: "",
-  description: "",
-};
-function setState(data) {
-  state = { ...state, ...data };
-  renderCurrentDay();
-}
-function getDayOfWeek(date) {
-  const dayOfWeek = new Date(date);
-  return dayOfWeek.getDay();
-}
 function GetDay() {
   const d = new Date();
   let weekday = new Array(7);
@@ -31,14 +14,14 @@ function GetDay() {
   const weekDayName = weekday[d.getDay()];
   return weekDayName;
 }
-async function handleFetchData() {
-  const result = window.location.search;
-  city = result.split("=")[1];
-  console.log(result, city, result.split("="));
+async function getData() {
+  const locationResult = window.location.search;
+  city = locationResult.split("=")[1];
   const url = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&cnt=40&units=metric&APPID=${API_KEY}`;
   const response = await fetch(url);
   data = await response.json();
-  setState({
+
+  const data2 = {
     temp: data.list[0].main.temp,
     country: data.city.country,
     city: data.city.name,
@@ -53,55 +36,44 @@ async function handleFetchData() {
     ],
     icon: data.list[0].weather[0].icon,
     description: data.list[0].weather[0].description,
-  });
-  renderCurrentDay();
-}
-
-function renderCurrentDay() {
-  const result = state.days.map((day) =>
-    renderListElement({
-      date: day.dt_txt,
-      minTemp: day.main.temp_min,
-      maxTemp: day.main.temp_max,
-      icon: day.weather[0].icon,
-    })
+  };
+  console.log({ data2 });
+  const result = data2.days.map(
+    (day) =>
+      `
+  <div class="row list_element">
+  <span class="list_item">${day.dt_txt.substring(0, 10)}</span>
+  <span class="list_item">${day.main.temp_min}</span>
+  <span class="list_item">${day.main.temp_max}</span>
+  <img src="http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png"
+  </div>
+  `
   );
-  const _html = `
+  const html = `
     <div class="currentday_container row">
     <div class="currentday_informations" >
-    <h4>${state.city}</h4>
+    <h4>${data2.city}</h4>
    <div className="row">
    <span className="font-weight-bold">${GetDay()}</span>
-   <span className="text-capitalize">${state.description}</span>
+   <span className="text-capitalize">${data2.description}</span>
   
     </div> 
-    <span>Humidity: ${state.humidity}%</span> 
+    <span>Humidity: ${data2.humidity}%</span> 
     </div>
     <div class="icon_container">  
     <img class="icon_weather" src="http://openweathermap.org/img/wn/${
-      state.icon
+      data2.icon
     }@2x.png" alt="weather_icon" >
     <span class="currentday_temp font-weight-bold">
-    ${state.temp}
+    ${data2.temp}
     </span>
     </div>
     </div>
    <div> 
     `;
-  currentDayDOM.innerHTML = _html;
+  currentDayDOM.innerHTML = html;
   const listDOM = document.getElementById("list");
   result.forEach(
     (listItem) => (listDOM.innerHTML = listDOM.innerHTML + listItem)
   );
-}
-
-function renderListElement({ date, minTemp, maxTemp, icon }) {
-  return `
-<div class="row list_element">
-<span class="list_item">${date.substring(0, 10)}</span>
-<span class="list_item">${minTemp}</span>
-<span class="list_item">${maxTemp}</span>
-<img src="http://openweathermap.org/img/wn/${icon}@2x.png"
-</div>
-`;
 }

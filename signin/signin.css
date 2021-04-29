@@ -4,6 +4,8 @@ body {
   height: 100%;
   background-color: #b0bec5;
   background-repeat: no-repeat;
+
+  background-image: url(../image/images_homepage/background.jpg);
 }
 
 .card0 {

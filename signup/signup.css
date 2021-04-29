@@ -22,16 +22,10 @@
   background: #1799e4;
 }
 
-/*
-*
-* ==========================================
-* FOR DEMO PURPOSES
-* ==========================================
-*
-*/
-
 body {
   min-height: 100vh;
+
+  background-image: url(../image/images_homepage/background.jpg);
 }
 
 .form-control:not(select) {
